@@ -13,9 +13,9 @@ func (app *application) routes() http.Handler {
 	router.MethodNotAllowed = http.HandlerFunc(app.methodNotAllowedResponse)
 
 	router.HandlerFunc(http.MethodGet, "/v1/healthcheck", app.healthcheckHandler)
-	router.HandlerFunc(http.MethodGet, "/", app.showSnippet)
+	router.HandlerFunc(http.MethodGet, "/", app.showIndexPage)
 	router.HandlerFunc(http.MethodPost, "/v1/users", app.registerUserHandler)
-	router.ServeFiles("/mailer/static/*filepath", http.Dir("static"))
+	router.ServeFiles("/static/*filepath", http.Dir("internal/mailer/static"))
 
-	return app.recoverPanic(app.rateLimit(app.authenticate(router)))
+	return app.recoverPanic(app.authenticate(router))
 }

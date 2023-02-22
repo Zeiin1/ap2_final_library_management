@@ -5,6 +5,7 @@ import (
 	"awesomeProject/internal/validator"
 	"errors"
 	"html/template"
+	"log"
 	"net/http"
 	"time"
 )
@@ -75,21 +76,22 @@ func (app *application) registerUserHandler(w http.ResponseWriter, r *http.Reque
 		app.serverErrorResponse(w, r, err)
 	}
 }
-func (app *application) showSnippet(w http.ResponseWriter, r *http.Request) {
+func (app *application) showIndexPage(w http.ResponseWriter, r *http.Request) {
 
-	// Create an instance of a templateData struct holding the snippet data.
+	// Template
+	ts, err := template.ParseFiles("./internal/mailer/templates/index.html")
 
-	files := []string{
-		"./mailer/html/index.tmpl",
-	}
-	ts, err := template.ParseFiles(files...)
 	if err != nil {
+		log.Println(err.Error())
 
 		return
 	}
-
-	data := " "
-	// Pass in the templateData struct when executing the template.
-	err = ts.Execute(w, data)
-
+	// We then use the Execute() method on the template set to write the template
+	// content as the response body. The last parameter to Execute() represents any
+	// dynamic data that we want to pass in, which for now we'll leave as nil.
+	err = ts.Execute(w, nil)
+	if err != nil {
+		log.Println(err.Error())
+		return
+	}
 }

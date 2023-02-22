@@ -1,0 +1,48 @@
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.app-btn {
+    width: 45%;
+    max-width: 160px;
+    color: #fff;
+    margin: 20px 10px;
+    text-align: left;
+    border-radius: 5px;
+    text-decoration: none;
+    font-family: "Lucida Grande", sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.blu {
+    background-color: #101010;
+    transition: background-color 0.25s linear;
+}
+
+.blu:hover {
+    background-color: #454545;
+}
+
+i {
+    width: 20%;
+    text-align: center;
+    font-size: 28px;
+    margin-right: 7px;
+}
+
+.big-txt {
+    font-size: 17px;
+    text-transform: capitalize;
+}
+
+.social-btns {
+    margin-right: 800px;
+    margin-top: 50px;
+}
+
+.small-text {
+    margin-top: 10px;
+}

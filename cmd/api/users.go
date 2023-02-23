@@ -2,6 +2,7 @@ package main
 
 import (
 	"awesomeProject/internal/data"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -103,5 +104,5 @@ func (app *application) loginUser(w http.ResponseWriter, r *http.Request) {
 	}
 	log.Println(id)
 
-	http.Redirect(w, r, "/", http.StatusSeeOther)
+	http.Redirect(w, r, fmt.Sprintf("/profile/%d", id), http.StatusSeeOther)
 }

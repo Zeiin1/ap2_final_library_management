@@ -2,80 +2,63 @@ package main
 
 import (
 	"awesomeProject/internal/data"
-	"awesomeProject/internal/validator"
-	"errors"
 	"html/template"
 	"log"
 	"net/http"
-	"time"
 )
 
 func (app *application) registerUserHandler(w http.ResponseWriter, r *http.Request) {
 
-	var input struct {
-		Name     string `json:"name"`
-		Email    string `json:"email"`
-		Password string `json:"password"`
+	r.ParseForm()
+	username := r.FormValue("name")
+	surname := r.FormValue("surname")
+	email := r.FormValue("email")
+	password := r.FormValue("password")
+
+	user := data.User{
+		Surname: surname,
+		Name:    username,
+		Email:   email,
 	}
 
-	err := app.readJSON(w, r, &input)
+	err := user.Password.Set(password)
 	if err != nil {
-		app.badRequestResponse(w, r, err)
-		return
-	}
-
-	user := &data.User{
-		Name:      input.Name,
-		Email:     input.Email,
-		Activated: false,
-	}
-
-	err = user.Password.Set(input.Password)
-	if err != nil {
-		app.serverErrorResponse(w, r, err)
-		return
-	}
-	v := validator.New()
-
-	if data.ValidateUser(v, user); !v.Valid() {
-		app.failedValidationResponse(w, r, v.Errors)
+		http.Redirect(w, r, "/registrationPage", http.StatusSeeOther)
 		return
 	}
 
 	err = app.models.Users.Insert(user)
 	if err != nil {
-		switch {
 
-		case errors.Is(err, data.ErrDuplicateEmail):
-			v.AddError("email", "a user with this email address already exists")
-			app.failedValidationResponse(w, r, v.Errors)
-		default:
-			app.serverErrorResponse(w, r, err)
-		}
+		http.Redirect(w, r, "/registrationPage", http.StatusSeeOther)
 		return
 	}
-	token, err := app.models.Tokens.New(user.ID, 3*24*time.Hour, data.ScopeActivation)
+
 	if err != nil {
-		app.serverErrorResponse(w, r, err)
+		http.Redirect(w, r, "/registrationPage", http.StatusSeeOther)
 		return
 	}
-	app.background(func() {
-		data := map[string]any{
-			"activationToken": token.Plaintext,
-			"userID":          user.ID,
-		}
-		err = app.mailer.Send(user.Email, "user_welcome.tmpl", data)
-		if err != nil {
-			app.logger.PrintError(err, nil)
 
-		}
-	})
-
-	err = app.writeJSON(w, http.StatusCreated, envelope{"user": user}, nil)
-	if err != nil {
-		app.serverErrorResponse(w, r, err)
-	}
+	http.Redirect(w, r, "/loginPage", http.StatusSeeOther)
+	return
 }
+func (app *application) registrationPage(w http.ResponseWriter, r *http.Request) {
+	user := data.User{}
+	ts, err := template.ParseFiles("./internal/mailer/templates/reg.html")
+
+	if err != nil {
+		log.Println(err.Error())
+
+		return
+	}
+	err = ts.Execute(w, user)
+	if err != nil {
+		log.Println(err.Error())
+		return
+	}
+
+}
+
 func (app *application) showIndexPage(w http.ResponseWriter, r *http.Request) {
 
 	// Template
@@ -86,12 +69,39 @@ func (app *application) showIndexPage(w http.ResponseWriter, r *http.Request) {
 
 		return
 	}
-	// We then use the Execute() method on the template set to write the template
-	// content as the response body. The last parameter to Execute() represents any
-	// dynamic data that we want to pass in, which for now we'll leave as nil.
 	err = ts.Execute(w, nil)
 	if err != nil {
 		log.Println(err.Error())
 		return
 	}
+}
+func (app *application) loginPage(w http.ResponseWriter, r *http.Request) {
+
+	// Template
+	ts, err := template.ParseFiles("./internal/mailer/templates/login.html")
+
+	if err != nil {
+		log.Println(err.Error())
+
+		return
+	}
+	err = ts.Execute(w, nil)
+	if err != nil {
+		log.Println(err.Error())
+		return
+	}
+}
+func (app *application) loginUser(w http.ResponseWriter, r *http.Request) {
+
+	r.ParseForm()
+	email := r.FormValue("email")
+	password := r.FormValue("password")
+	id, active := app.models.Users.Authenticate(email, password)
+	if !active {
+		http.Redirect(w, r, "/loginPage", http.StatusSeeOther)
+		return
+	}
+	log.Println(id)
+
+	http.Redirect(w, r, "/", http.StatusSeeOther)
 }

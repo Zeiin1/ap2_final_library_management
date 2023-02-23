@@ -3,9 +3,9 @@ package data
 import (
 	"awesomeProject/internal/validator"
 	"context"
-	"crypto/sha256"
 	"database/sql"
 	"errors"
+	"fmt"
 	"golang.org/x/crypto/bcrypt"
 	"time"
 )
@@ -14,13 +14,10 @@ type User struct {
 	ID        int64     `json:"id"`
 	CreatedAt time.Time `json:"created_at"`
 	Name      string    `json:"name"`
+	Surname   string    `json:"surname"`
 	Email     string    `json:"email"`
 	Password  password  `json:"-"`
-	Activated bool      `json:"activated"`
-	Version   int       `json:"-"`
 }
-
-var AnonymousUser = &User{}
 
 var (
 	ErrDuplicateEmail = errors.New("duplicate email")
@@ -30,19 +27,16 @@ type UserModel struct {
 	DB *sql.DB
 }
 
-func (u *User) isAnonymous() bool {
-	return u == AnonymousUser
-}
-func (m UserModel) Insert(user *User) error {
+func (m UserModel) Insert(user User) error {
 	query := `
-INSERT INTO users (name, email, password_hash, activated)
+INSERT INTO users (name, email, surname, password_hash)
 VALUES ($1, $2, $3, $4)
-RETURNING id, created_at, version`
-	args := []any{user.Name, user.Email, user.Password.hash, user.Activated}
+RETURNING id, created_at`
+	args := []any{user.Name, user.Email, user.Surname, user.Password.hash}
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	err := m.DB.QueryRowContext(ctx, query, args...).Scan(&user.ID, &user.CreatedAt, &user.Version)
+	err := m.DB.QueryRowContext(ctx, query, args...).Scan(&user.ID, &user.CreatedAt)
 	if err != nil {
 		switch {
 		case err.Error() == `pq: duplicate key value violates unique constraint "users_email_key"`:
@@ -58,7 +52,7 @@ func (m UserModel) UpdatePassword(user *User) error {
 UPDATE users
 SET  password_hash = $1, activated = $2
 WHERE id = $3`
-	args := []any{user.Password.hash, user.Activated, user.ID}
+	args := []any{user.Password.hash /*user.Activated,*/, user.ID}
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
@@ -84,8 +78,8 @@ WHERE email = $1`
 		&user.Name,
 		&user.Email,
 		&user.Password.hash,
-		&user.Activated,
-		&user.Version,
+		/*	&user.Activated,
+			&user.Version,*/
 	)
 	if err != nil {
 		switch {
@@ -96,6 +90,33 @@ WHERE email = $1`
 		}
 	}
 	return &user, nil
+}
+func (m *UserModel) Authenticate(email, password string) (int, bool) {
+
+	var id int
+	var hashedPassword []byte
+	query := `
+SELECT id, password_hash
+FROM users
+WHERE email = $1`
+
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+	err := m.DB.QueryRowContext(ctx, query, email).Scan(
+		&id,
+		&hashedPassword,
+	)
+	err = bcrypt.CompareHashAndPassword(hashedPassword, []byte(password))
+	if err != nil {
+		fmt.Println(err)
+		if errors.Is(err, bcrypt.ErrMismatchedHashAndPassword) {
+			return 0, false
+		} else {
+			fmt.Println(err)
+			return 0, false
+		}
+	}
+	return id, true
 }
 
 func (m UserModel) Update(user *User) error {
@@ -108,13 +129,13 @@ RETURNING version`
 		user.Name,
 		user.Email,
 		user.Password.hash,
-		user.Activated,
+		/*user.Activated,*/
 		user.ID,
-		user.Version,
+		/*user.Version,*/
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
-	err := m.DB.QueryRowContext(ctx, query, args...).Scan(&user.Version)
+	err := m.DB.QueryRowContext(ctx, query, args...).Scan(&user.Password)
 	if err != nil {
 		switch {
 		case err.Error() == `pq: duplicate key value violates unique constraint "users_email_key"`:
@@ -176,37 +197,4 @@ func ValidateUser(v *validator.Validator, user *User) {
 		panic("missing password hash for user")
 	}
 
-}
-func (m UserModel) GetForToken(tokenScope, tokePlaintext string) (*User, error) {
-	tokenHash := sha256.Sum256([]byte(tokePlaintext))
-	query := `
-SELECT users.id, users.created_at, users.name, users.email, users.password_hash, users.activated, users.version
-FROM users
-INNER JOIN tokens
-ON users.id = tokens.user_id
-WHERE tokens.hash = $1
-AND tokens.scope = $2
-AND tokens.expiry > $3`
-	args := []any{tokenHash[:], tokenScope, time.Now()}
-	var user User
-	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
-	defer cancel()
-	err := m.DB.QueryRowContext(ctx, query, args...).Scan(
-		&user.ID,
-		&user.CreatedAt,
-		&user.Name,
-		&user.Email,
-		&user.Password.hash,
-		&user.Activated,
-		&user.Version)
-	if err != nil {
-		switch {
-		case errors.Is(err, sql.ErrNoRows):
-			return nil, ErrRecordNotFound
-		default:
-			return nil, err
-		}
-
-	}
-	return &user, nil
 }

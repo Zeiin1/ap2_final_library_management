@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Registration form</title>
+    <link rel="stylesheet" type="text/css" href="/static/src/reg.css">
+</head>
+<body>
+
+
+
+<div class="signupFrm">
+    <div class="wrapper">
+        <form method="POST" action="/login"  class="form">
+            <h1 class="title">Login</h1>
+
+            <div class="inputContainer">
+                <label for="email" class="label">Email</label>
+                <input type="text" name="email" id="email" class="input"/>
+
+            </div>
+
+
+
+
+            <div class="inputContainer">
+                <label for="password" class="label">Password</label>
+                <input type="password" name="password" id="password" class="input" >
+
+            </div>
+
+
+
+            <input type="submit" class="submitBtn" value="Sign in">
+            <a href="/registration">Do not have account? Create!</a>
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>

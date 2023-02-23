@@ -45,7 +45,7 @@ func (app *application) registerUserHandler(w http.ResponseWriter, r *http.Reque
 }
 func (app *application) registrationPage(w http.ResponseWriter, r *http.Request) {
 	user := data.User{}
-	ts, err := template.ParseFiles("./internal/mailer/templates/reg.html")
+	ts, err := template.ParseFiles("./internal/web/templates/reg.html")
 
 	if err != nil {
 		log.Println(err.Error())
@@ -63,7 +63,7 @@ func (app *application) registrationPage(w http.ResponseWriter, r *http.Request)
 func (app *application) showIndexPage(w http.ResponseWriter, r *http.Request) {
 
 	// Template
-	ts, err := template.ParseFiles("./internal/mailer/templates/index.html")
+	ts, err := template.ParseFiles("./internal/web/templates/index.html")
 
 	if err != nil {
 		log.Println(err.Error())
@@ -79,7 +79,7 @@ func (app *application) showIndexPage(w http.ResponseWriter, r *http.Request) {
 func (app *application) loginPage(w http.ResponseWriter, r *http.Request) {
 
 	// Template
-	ts, err := template.ParseFiles("./internal/mailer/templates/login.html")
+	ts, err := template.ParseFiles("./internal/web/templates/login.html")
 
 	if err != nil {
 		log.Println(err.Error())
@@ -102,7 +102,36 @@ func (app *application) loginUser(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/loginPage", http.StatusSeeOther)
 		return
 	}
-	log.Println(id)
 
 	http.Redirect(w, r, fmt.Sprintf("/profile/%d", id), http.StatusSeeOther)
+}
+func (app *application) profilePage(w http.ResponseWriter, r *http.Request) {
+
+	id, err := app.readIDParam(r)
+	log.Println(id)
+	if err != nil {
+		fmt.Println(err)
+		http.Redirect(w, r, "/loginPage", http.StatusSeeOther)
+	}
+
+	user, err := app.models.Users.GetById(id)
+	log.Println(user.Name)
+	if err != nil {
+		fmt.Printf("broken2")
+		fmt.Println(err)
+		http.Redirect(w, r, "/loginPage", http.StatusSeeOther)
+	}
+	ts, err := template.ParseFiles("./internal/web/templates/profile.html")
+
+	if err != nil {
+		log.Println(err.Error())
+
+		return
+	}
+	err = ts.Execute(w, user)
+	if err != nil {
+		log.Println(err.Error())
+		return
+	}
+
 }

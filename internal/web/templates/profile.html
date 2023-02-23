@@ -42,10 +42,10 @@
                     <li class="nav-link"><a href="">Profile</a></li>
                     <li class="nav-link"><a href="#aboutus">Mail</a></li>
                     <li class="nav-link"><a href="#aboutus">Dept</a></li>
-                    <a th:text="${user.getName()}" style="color: black" th:href="@{/user_info/{id}(id=${user.getId()})}" >user</a>
+                    <a text="{{.Name}}" style="color: black" href="/user_info/{{.ID}}" >{{.Name}}</a>
 
                     <div class="icons">
-                        <a th:href="@{/user_info/{id}(id=${user.getId()})}">
+                        <a href="/user_info/{{.ID}}">
                             <svg id="first" width="25" height="25" viewBox="0 0 898 898" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -366,7 +366,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
 
-                    <img class="logo_img" src="/img/logo.png" alt="" width="120" height="29">
+                    <img class="logo_img" src="/static/img/logo.png" alt="" width="120" height="29">
 
                     <p>
                         if you have any questions or suggestions, you can contact us via messengers or by writing to us

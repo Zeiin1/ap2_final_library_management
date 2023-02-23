@@ -17,7 +17,7 @@ func (app *application) routes() http.Handler {
 	router.HandlerFunc(http.MethodPost, "/registration", app.registerUserHandler)
 	router.HandlerFunc(http.MethodGet, "/registrationPage", app.registrationPage)
 	router.HandlerFunc(http.MethodGet, "/loginPage", app.loginPage)
-	router.HandlerFunc(http.MethodGet, "/profile/:id", app.loginPage)
+	router.HandlerFunc(http.MethodGet, "/profile/:id", app.profilePage)
 	router.HandlerFunc(http.MethodPost, "/login", app.loginUser)
 	router.ServeFiles("/static/*filepath", http.Dir("internal/web/static"))
 

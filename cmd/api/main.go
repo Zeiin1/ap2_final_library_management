@@ -3,7 +3,7 @@ package main
 import (
 	"awesomeProject/internal/data"
 	"awesomeProject/internal/jsonlog"
-	"awesomeProject/internal/mailer"
+	"awesomeProject/internal/web"
 	"context"
 	"database/sql"
 	"flag"
@@ -42,7 +42,7 @@ type application struct {
 	config config
 	logger *jsonlog.Logger
 	models data.Models
-	mailer mailer.Mailer
+	mailer web.Mailer
 	wg     sync.WaitGroup
 }
 
@@ -87,7 +87,7 @@ func main() {
 		config: cfg,
 		logger: logger,
 		models: data.NewModels(db),
-		mailer: mailer.New(cfg.smtp.host, cfg.smtp.port, cfg.smtp.username, cfg.smtp.password, cfg.smtp.sender),
+		mailer: web.New(cfg.smtp.host, cfg.smtp.port, cfg.smtp.username, cfg.smtp.password, cfg.smtp.sender),
 	}
 	err = app.serve()
 	if err != nil {

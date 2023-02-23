@@ -91,6 +91,33 @@ WHERE email = $1`
 	}
 	return &user, nil
 }
+func (m UserModel) GetById(id int64) (*User, error) {
+	query := `
+SELECT id,  name, surname, email
+FROM users
+WHERE id = $1`
+	var user User
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+	err := m.DB.QueryRowContext(ctx, query, id).Scan(
+		&user.ID,
+		&user.Name,
+		&user.Surname,
+		&user.Email,
+
+		/*	&user.Activated,
+			&user.Version,*/
+	)
+	if err != nil {
+		switch {
+		case errors.Is(err, sql.ErrNoRows):
+			return nil, ErrRecordNotFound
+		default:
+			return nil, err
+		}
+	}
+	return &user, nil
+}
 func (m *UserModel) Authenticate(email, password string) (int, bool) {
 
 	var id int

@@ -3,7 +3,6 @@ package main
 import (
 	"awesomeProject/internal/data"
 	"awesomeProject/internal/jsonlog"
-	"awesomeProject/internal/web"
 	"context"
 	"database/sql"
 	"flag"
@@ -30,20 +29,13 @@ type config struct {
 		rps     float64
 		burst   int
 	}
-	smtp struct {
-		host     string
-		port     int
-		username string
-		password string
-		sender   string
-	}
 }
 type application struct {
 	config config
 	logger *jsonlog.Logger
 	models data.Models
-	mailer web.Mailer
-	wg     sync.WaitGroup
+
+	wg sync.WaitGroup
 }
 
 func main() {
@@ -68,11 +60,6 @@ func main() {
 	flag.Float64Var(&cfg.limiter.rps, "limiter-rps", 2, "Rate limiter maximum requests per second")
 	flag.IntVar(&cfg.limiter.burst, "limiter-burst", 4, "Rate limiter maximum burst")
 
-	flag.StringVar(&cfg.smtp.host, "smtp-host", "smtp-mail.outlook.com", "SMTP host")
-	flag.IntVar(&cfg.smtp.port, "smtp-port", 587, "SMTP port")
-	flag.StringVar(&cfg.smtp.username, "smtp-username", "211333@astanait.edu.kz", "SMTP username")
-	flag.StringVar(&cfg.smtp.password, "smtp-password", "Aitu2021!", "SMTP password")
-	flag.StringVar(&cfg.smtp.sender, "smtp-sender", "Zein <211333@astanait.edu.kz>", "SMTP sender")
 	flag.Parse()
 	logger := jsonlog.New(os.Stdout, jsonlog.LevelInfo)
 	db, err := openDB(cfg)
@@ -87,7 +74,6 @@ func main() {
 		config: cfg,
 		logger: logger,
 		models: data.NewModels(db),
-		mailer: web.New(cfg.smtp.host, cfg.smtp.port, cfg.smtp.username, cfg.smtp.password, cfg.smtp.sender),
 	}
 	err = app.serve()
 	if err != nil {
@@ -96,7 +82,7 @@ func main() {
 }
 
 func openDB(cfg config) (*sql.DB, error) {
-	db, err := sql.Open("postgres", /*cfg.db.dsn*/"user=postgres password=0000 dbname=greenlight sslmode=disable")
+	db, err := sql.Open("postgres" /*cfg.db.dsn*/, "user=postgres password=0000 dbname=greenlight sslmode=disable")
 	if err != nil {
 		return nil, err
 	}

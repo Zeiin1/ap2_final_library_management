@@ -24,6 +24,9 @@ func (app *application) routes() http.Handler {
 	//put method its not working
 	router.HandlerFunc(http.MethodGet, "/delete/:id", app.deleteUser) //actually it must be delete mapping but
 	//i find out that html version supports only post and get methods
+	router.HandlerFunc(http.MethodGet, "/library/add_book", app.addBookPage)
+	router.HandlerFunc(http.MethodPost, "/library/create_book", app.addBookPageToDb)
+	router.HandlerFunc(http.MethodGet, "/library/show", app.showAllBooksFromDb)
 	router.ServeFiles("/static/*filepath", http.Dir("internal/web/static"))
 
 	return app.recoverPanic(router)

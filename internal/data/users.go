@@ -118,6 +118,21 @@ WHERE id = $1`
 	}
 	return &user, nil
 }
+func (m UserModel) Delete(id int64) bool {
+	query := `
+DELETE FROM users WHERE id = $1`
+	args := []any{id}
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+
+	err := m.DB.QueryRowContext(ctx, query, args...)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	return true
+
+}
 func (m *UserModel) Authenticate(email, password string) (int, bool) {
 
 	var id int
@@ -146,35 +161,27 @@ WHERE email = $1`
 	return id, true
 }
 
-func (m UserModel) Update(user *User) error {
+func (m UserModel) Update(user *User) bool {
 	query := `
 UPDATE users
-SET name = $1, email = $2, password_hash = $3, activated = $4, version = version + 1
-WHERE id = $5 AND version = $6
-RETURNING version`
+SET name = $1, email = $2, password_hash = $3, surname = $4
+WHERE id = $5 
+RETURNING id`
 	args := []any{
 		user.Name,
 		user.Email,
 		user.Password.hash,
-		/*user.Activated,*/
+		user.Surname,
 		user.ID,
-		/*user.Version,*/
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
-	err := m.DB.QueryRowContext(ctx, query, args...).Scan(&user.Password)
+	err := m.DB.QueryRowContext(ctx, query, args...)
 	if err != nil {
-		switch {
-		case err.Error() == `pq: duplicate key value violates unique constraint "users_email_key"`:
-			return ErrDuplicateEmail
-			return ErrDuplicateEmail
-		case errors.Is(err, sql.ErrNoRows):
-			return ErrEditConflict
-		default:
-			return err
-		}
+		fmt.Println(err)
+		return false
 	}
-	return nil
+	return true
 }
 
 type password struct {

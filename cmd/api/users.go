@@ -108,16 +108,16 @@ func (app *application) loginUser(w http.ResponseWriter, r *http.Request) {
 func (app *application) profilePage(w http.ResponseWriter, r *http.Request) {
 
 	id, err := app.readIDParam(r)
-	log.Println(id)
+
 	if err != nil {
 		fmt.Println(err)
 		http.Redirect(w, r, "/loginPage", http.StatusSeeOther)
 	}
 
 	user, err := app.models.Users.GetById(id)
-	log.Println(user.Name)
+
 	if err != nil {
-		fmt.Printf("broken2")
+
 		fmt.Println(err)
 		http.Redirect(w, r, "/loginPage", http.StatusSeeOther)
 	}
@@ -133,5 +133,89 @@ func (app *application) profilePage(w http.ResponseWriter, r *http.Request) {
 		log.Println(err.Error())
 		return
 	}
+
+}
+func (app *application) backProfilePage(w http.ResponseWriter, r *http.Request) {
+
+	id, err := app.readIDParam(r)
+
+	if err != nil {
+		fmt.Println(err)
+		http.Redirect(w, r, "/loginPage", http.StatusSeeOther)
+	}
+
+	user, err := app.models.Users.GetById(id)
+
+	if err != nil {
+
+		fmt.Println(err)
+		http.Redirect(w, r, "/loginPage", http.StatusSeeOther)
+	}
+	ts, err := template.ParseFiles("./internal/web/templates/backProfile.html")
+
+	if err != nil {
+		log.Println(err.Error())
+
+		return
+	}
+	err = ts.Execute(w, user)
+	if err != nil {
+		log.Println(err.Error())
+		return
+	}
+
+}
+func (app *application) updateUserInfo(w http.ResponseWriter, r *http.Request) {
+
+	id, err := app.readIDParam(r)
+	r.ParseForm()
+	email := r.FormValue("email")
+	name := r.FormValue("name")
+	surname := r.FormValue("surname")
+	password := r.FormValue("password")
+	if err != nil {
+		fmt.Println(err)
+		http.Redirect(w, r, fmt.Sprintf("/user_info/%d", id), http.StatusSeeOther)
+	}
+	user := data.User{
+		ID:      id,
+		Surname: surname,
+		Email:   email,
+		Name:    name,
+	}
+	err = user.Password.Set(password)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	ok := app.models.Users.Update(&user)
+	if !ok {
+		fmt.Println("nothing changed")
+		http.Redirect(w, r, fmt.Sprintf("/user_info/%d", id), http.StatusSeeOther)
+	}
+
+	if err != nil {
+
+		fmt.Println(err)
+		http.Redirect(w, r, fmt.Sprintf("/user_info/%d", id), http.StatusSeeOther)
+	}
+	http.Redirect(w, r, fmt.Sprintf("/user_info/%d", id), http.StatusSeeOther)
+
+}
+
+func (app *application) deleteUser(w http.ResponseWriter, r *http.Request) {
+
+	id, err := app.readIDParam(r)
+
+	if err != nil {
+		fmt.Println(err)
+		http.Redirect(w, r, fmt.Sprintf("/user_info/%d", id), http.StatusSeeOther)
+	}
+	ok := app.models.Users.Delete(id)
+	if !ok {
+		http.Redirect(w, r, fmt.Sprintf("/user_info/%d", id), http.StatusSeeOther)
+	}
+
+	http.Redirect(w, r, "/", http.StatusSeeOther)
 
 }

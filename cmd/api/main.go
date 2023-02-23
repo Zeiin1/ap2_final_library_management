@@ -96,8 +96,7 @@ func main() {
 }
 
 func openDB(cfg config) (*sql.DB, error) {
-
-	db, err := sql.Open("postgres", "user=postgres password=0000 dbname=greenlight sslmode=disable")
+	db, err := sql.Open("postgres", /*cfg.db.dsn*/"user=postgres password=0000 dbname=greenlight sslmode=disable")
 	if err != nil {
 		return nil, err
 	}

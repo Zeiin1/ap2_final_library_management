@@ -15,35 +15,35 @@
 - [Technology Stack](#built-with)
 
 ## Project relevance
-The Library Management System is an essential  
-tool that helps to manage various library operations  
-effectively. With the increasing demand for  
-digitalization and technology, it is essential  
-to have a system that simplifies the library  
-operations and improves the user experience.  
-This project was chosen as it is relevant to  
-the current scenario and provides a solution  
-that will help the libraries in Kazakhstan to  
+The Library Management System is an essential 
+tool that helps to manage various library operations 
+effectively. With the increasing demand for 
+digitalization and technology, it is essential 
+to have a system that simplifies the library 
+operations and improves the user experience. 
+This project was chosen as it is relevant to 
+the current scenario and provides a solution 
+that will help the libraries in Kazakhstan to 
 manage their operations more efficiently.
 
 ## Analysis of competitors
-There are several library management systems  
-available in Kazakhstan, such as Librarika,  
-Koha, and Library Management System (LMS).  
-However, our app aims to provide unique features  
-that can compete with these projects.  
-Our app will have a user-friendly interface,  
-customizable options, online payment features,  
-and integration with other software. These  
-features will make our app more competitive in  
+There are several library management systems 
+available in Kazakhstan, such as Librarika, 
+Koha, and Library Management System (LMS). 
+However, our app aims to provide unique features 
+that can compete with these projects. 
+Our app will have a user-friendly interface,
+customizable options, online payment features, 
+and integration with other software. These 
+features will make our app more competitive in 
 the market and provide a better user experience.
 
 ## Project auditory
-The target audience for our app is libraries in  
-Kazakhstan. Our app is designed to meet the needs  
-of libraries of all sizes, including academic,  
-public, and private libraries. The app will provide 
-a solution that will simplify library operations 
+The target audience for our app is libraries in 
+Kazakhstan. Our app is designed to meet the needs 
+of libraries of all sizes, including academic, 
+public, and private libraries. The app will provide
+a solution that will simplify library operations
 and improve the user experience for library patrons.
 
 ## Project features

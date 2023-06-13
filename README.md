@@ -54,13 +54,12 @@ and improve the user experience for library patrons.
 ## Built With
 * Go
 * PostgreSQL
-* React
-* Love
 
 ## Authors
 
-* **Alar** - [Alar-q](https://github.com/alar-q) - [@alar4j](https://t.me/alar4j)
 * **Zein** - [Zein](https://github.com/Zeiin1) - [@zeiin1](https://t.me/zeiin1)
+* **Aslan** - [Aslan](https://github.com/sat0urn) - [@aslansat](https://t.me/aslansat)
+* **Adil** - [s](https://github.com/s) - [@Lubazz](https://t.me/Lubazz)
 
 ```
  _______ _______ _______ _____  _______ _______ 

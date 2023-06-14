@@ -1,13 +1,11 @@
-FROM golang:latest as builder
+FROM golang
+
+COPY . /app
 
 WORKDIR /app
 
-COPY go.mod go.sum ./
-
 RUN go mod download
 
-COPY . .
+ENTRYPOINT go run main.go
 
-RUN go build -o main .
-
-CMD [ "./main" ]
+EXPOSE 8081

@@ -2,14 +2,14 @@ version: '3'
 
 services:
 
-  api_gateway:
+  api-gateway:
     build:
       context: ./../go-grpc-api-gateway
       dockerfile: ../go-grpc-api-gateway/Dockerfile
     ports:
       - "3000:3000"
 
-  fullstack_postgres:
+  fullstack-postgres:
     image: 'postgres:16beta1'
     ports:
       - "5432:5432"
@@ -18,23 +18,23 @@ services:
       POSTGRES_PASSWORD: 1234
       POSTGRES_DB: services
 
-  auth_svc:
+  auth-svc:
     build:
       context: ./../go-grpc-auth-svc
       dockerfile: ../go-grpc-auth-svc/Dockerfile
     ports:
       - "8080:8080"
 
-  order_svc:
+  order-svc:
     build:
       context: ./../go-grpc-order-svc
       dockerfile: ../go-grpc-order-svc/Dockerfile
     ports:
       - "8081:8081"
 
-  product_svc:
+  product-svc:
     build:
       context: ./../go-grpc-product-svc
-      dockerfile: ./../go-grpc-auth-svc/Dockerfile
+      dockerfile: ./../go-grpc-product-svc/Dockerfile
     ports:
       - "8082:8082"

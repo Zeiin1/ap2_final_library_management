@@ -1,5 +1,5 @@
 # Auth Microservice
-Create `dev.env` file in `pkg/config/envs` _(create directory envs)_, then paste the code:
+Create `dev.env` file in `pkg/config/envs` __(create directory envs)__, then paste the code:
 
 ```env
 PORT=:8080

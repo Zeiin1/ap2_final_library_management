@@ -1,4 +1,4 @@
-#                                                       Branches definitions
+# Branches Definitions
 1. `master`                          -> front-end/back-end project from FIRST advanced programming
 2. `test`                            -> consists tests on microservices(old version)
 3. `api-gateway-service`             -> server or service that acts as an entry point for client requests to a microservices-based architecture
@@ -25,7 +25,7 @@
 - [Project features](#project-features)
 - [Technology Stack](#built-with)
 
-## Project relevance
+## Project Relevance
 The Library Management System is an essential 
 tool that helps to manage various library operations 
 effectively. With the increasing demand for 
@@ -37,7 +37,7 @@ the current scenario and provides a solution
 that will help the libraries in Kazakhstan to 
 manage their operations more efficiently.
 
-## Analysis of competitors
+## Analysis of Competitors
 There are several library management systems 
 available in Kazakhstan, such as Librarika, 
 Koha, and Library Management System (LMS). 
@@ -49,7 +49,7 @@ and integration with other software. These
 features will make our app more competitive in 
 the market and provide a better user experience.
 
-## Project auditory
+## Project Auditory
 The target audience for our app is libraries in 
 Kazakhstan. Our app is designed to meet the needs 
 of libraries of all sizes, including academic, 
@@ -57,7 +57,7 @@ public, and private libraries. The app will provide
 a solution that will simplify library operations
 and improve the user experience for library patrons.
 
-## Project features
+## Project Features
 * User-friendly interface: The app will have an intuitive and easy-to-use interface that will make it easy for library staff to manage library operations.
 * Customizable options: The app will allow libraries to customize the system based on their requirements, such as adding or removing features, changing the layout, and more.
 * Integration with other software: The app will integrate with other software commonly used in libraries, such as cataloging software, to provide a seamless experience.
@@ -67,7 +67,6 @@ and improve the user experience for library patrons.
 * PostgreSQL
 
 ## Authors
-
 * **Zein** - [Zein](https://github.com/Zeiin1) - [@zeiin1](https://t.me/zeiin1)
 * **Aslan** - [Aslan](https://github.com/sat0urn) - [@aslansat](https://t.me/aslansat)
 * **Adil** - [Adil](https://github.com/s) - [@Lubazz](https://t.me/Lubazz)

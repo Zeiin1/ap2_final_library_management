@@ -1,10 +1,10 @@
 # Branches definitions:
-1. `master` -> front-end/back-end project from FIRST advanced programming
-2. `test` -> consists tests on microservices(old version)
-3. `api-gateway-service` -> server or service that acts as an entry point for client requests to a microservices-based architecture
-4. `auth-service` -> microservice for authentication
-5. `book-service` -> microservice for book manage
-6. `order-service` -> microservice for book ordering manage
+1. `master`                          -> front-end/back-end project from FIRST advanced programming
+2. `test`                            -> consists tests on microservices(old version)
+3. `api-gateway-service`             -> server or service that acts as an entry point for client requests to a microservices-based architecture
+4. `auth-service`                    -> microservice for authentication
+5. `book-service`                    -> microservice for book manage
+6. `order-service`                   -> microservice for book ordering manage
 7. `parent-microservice_development` -> consists from trials to implement front-end side to microservices-based backend(only auth was implemented)
 
 *Microservices/Docker-components* -> 3, 4, 5, 6

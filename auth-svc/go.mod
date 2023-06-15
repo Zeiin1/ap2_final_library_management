@@ -1,4 +1,4 @@
-module github.com/sat0urn/go-grpc-auth-svc
+module github.com/sat0urn/auth-svc
 
 go 1.19
 

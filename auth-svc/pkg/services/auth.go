@@ -2,10 +2,10 @@ package services
 
 import (
 	"context"
-	"github.com/sat0urn/go-grpc-auth-svc/pkg/db"
-	"github.com/sat0urn/go-grpc-auth-svc/pkg/models"
-	"github.com/sat0urn/go-grpc-auth-svc/pkg/pb"
-	"github.com/sat0urn/go-grpc-auth-svc/pkg/utils"
+	"github.com/sat0urn/auth-svc/pkg/db"
+	"github.com/sat0urn/auth-svc/pkg/models"
+	"github.com/sat0urn/auth-svc/pkg/pb"
+	"github.com/sat0urn/auth-svc/pkg/utils"
 	"net/http"
 )
 

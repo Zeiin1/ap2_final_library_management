@@ -3,7 +3,7 @@ package utils
 import (
 	"errors"
 	"github.com/golang-jwt/jwt"
-	"github.com/sat0urn/go-grpc-auth-svc/pkg/models"
+	"github.com/sat0urn/auth-svc/pkg/models"
 	"time"
 )
 

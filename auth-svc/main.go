@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/sat0urn/go-grpc-auth-svc/pkg/config"
-	"github.com/sat0urn/go-grpc-auth-svc/pkg/db"
-	"github.com/sat0urn/go-grpc-auth-svc/pkg/pb"
-	"github.com/sat0urn/go-grpc-auth-svc/pkg/services"
-	"github.com/sat0urn/go-grpc-auth-svc/pkg/utils"
+	"github.com/sat0urn/auth-svc/pkg/config"
+	"github.com/sat0urn/auth-svc/pkg/db"
+	"github.com/sat0urn/auth-svc/pkg/pb"
+	"github.com/sat0urn/auth-svc/pkg/services"
+	"github.com/sat0urn/auth-svc/pkg/utils"
 	"google.golang.org/grpc"
 	"log"
 	"net"
@@ -22,7 +22,7 @@ func main() {
 
 	jwt := utils.JwtWrapper{
 		SecretKey:       c.JWTSecretKey,
-		Issuer:          "go-grpc-auth-svc",
+		Issuer:          "auth-svc",
 		ExpirationHours: 24 * 365,
 	}
 

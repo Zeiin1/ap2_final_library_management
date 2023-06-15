@@ -11,6 +11,10 @@ Exchange the values in _{} brackets_ with needed.
 
 ---
 
+It will not create a database `services` by itself. I ask you to create it by own!
+
+---
+
 To run the Auth Microservice, write it in terminal:
 ```
 make server

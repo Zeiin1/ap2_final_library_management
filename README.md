@@ -12,6 +12,8 @@
 
 *Microservices/Docker-components* -> 3, 4, 5, 6
 
+---
+
 # Library Management system
 > This project is a library management system being 
 > developed in Kazakhstan. The system is designed to

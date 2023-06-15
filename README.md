@@ -9,7 +9,7 @@
 
 7. `parent-microservice_development` -> consists from trials to implement front-end side to microservices-based backend(only auth was implemented)
 
-# Library management system
+# Library Management system
 > This project is a library management system being 
 > developed in Kazakhstan. The system is designed to
 > automate various library operations and improve 

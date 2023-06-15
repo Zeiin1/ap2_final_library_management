@@ -1,11 +1,11 @@
 # Branches definitions:
-1. `[master](https://github.com/Zeiin1/ap2_final_library_management/tree/master)` -> front-end/back-end project from FIRST advanced programming
-2. `[test](https://github.com/Zeiin1/ap2_final_library_management/tree/test)` -> consists tests on microservices(old version)
-3. `[api-gateway-service](https://github.com/Zeiin1/ap2_final_library_management/tree/api-gateway-service)` -> server or service that acts as an entry point for client requests to a microservices-based architecture
-4. `[auth-service](https://github.com/Zeiin1/ap2_final_library_management/tree/auth-service)` -> microservice for authentication
-5. `[book-service](https://github.com/Zeiin1/ap2_final_library_management/tree/book-service)` -> microservice for book manage
-6. `[order-service](https://github.com/Zeiin1/ap2_final_library_management/tree/order-service)` -> microservice for book ordering manage
-7. `[parent-microservice_development](https://github.com/Zeiin1/ap2_final_library_management/tree/parent-microservice_development)` -> consists from trials to implement front-end side to microservices-based backend(only auth was implemented)
+1. [master](https://github.com/Zeiin1/ap2_final_library_management/tree/master) -> front-end/back-end project from FIRST advanced programming
+2. [test](https://github.com/Zeiin1/ap2_final_library_management/tree/test) -> consists tests on microservices(old version)
+3. [api-gateway-service](https://github.com/Zeiin1/ap2_final_library_management/tree/api-gateway-service) -> server or service that acts as an entry point for client requests to a microservices-based architecture
+4. [auth-service](https://github.com/Zeiin1/ap2_final_library_management/tree/auth-service) -> microservice for authentication
+5. [book-service](https://github.com/Zeiin1/ap2_final_library_management/tree/book-service) -> microservice for book manage
+6. [order-service](https://github.com/Zeiin1/ap2_final_library_management/tree/order-service) -> microservice for book ordering manage
+7. [parent-microservice_development](https://github.com/Zeiin1/ap2_final_library_management/tree/parent-microservice_development) -> consists from trials to implement front-end side to microservices-based backend(only auth was implemented)
 
 *Microservices/Docker-components* -> 3, 4, 5, 6
 

@@ -70,6 +70,7 @@ and improve the user experience for library patrons.
 ## Built With
 * Go
 * PostgreSQL
+* Docker
 
 ## Authors
 * **Zein** - [Zein](https://github.com/Zeiin1) - [@zeiin1](https://t.me/zeiin1)

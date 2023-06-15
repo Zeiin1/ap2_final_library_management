@@ -3,9 +3,9 @@ package config
 import "github.com/spf13/viper"
 
 type Config struct {
-	Port          string `mapstructure:"PORT"`
-	DBUrl         string `mapstructure:"DB_URL"`
-	ProductSvcUrl string `mapstructure:"PRODUCT_SVC_URL"`
+	Port       string `mapstructure:"PORT"`
+	DBUrl      string `mapstructure:"DB_URL"`
+	BookSvcUrl string `mapstructure:"BOOK_SVC_URL"`
 }
 
 func LoadConfig() (config Config, err error) {

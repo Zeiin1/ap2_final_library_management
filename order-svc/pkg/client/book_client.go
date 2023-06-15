@@ -7,24 +7,24 @@ import (
 	"google.golang.org/grpc"
 )
 
-type ProductServiceClient struct {
-	Client pb.ProductServiceClient
+type BookServiceClient struct {
+	Client pb.BookServiceClient
 }
 
-func InitProductServiceClient(url string) ProductServiceClient {
+func InitBookServiceClient(url string) BookServiceClient {
 	cc, err := grpc.Dial(url, grpc.WithInsecure())
 	if err != nil {
 		fmt.Println("Could not connect:", err)
 	}
 
-	c := ProductServiceClient{
-		Client: pb.NewProductServiceClient(cc),
+	c := BookServiceClient{
+		Client: pb.NewBookServiceClient(cc),
 	}
 
 	return c
 }
 
-func (c *ProductServiceClient) FindOne(productId int64) (*pb.FindOneResponse, error) {
+func (c *BookServiceClient) FindOne(productId int64) (*pb.FindOneResponse, error) {
 	req := &pb.FindOneRequest{
 		Id: productId,
 	}
@@ -32,7 +32,7 @@ func (c *ProductServiceClient) FindOne(productId int64) (*pb.FindOneResponse, er
 	return c.Client.FindOne(context.Background(), req)
 }
 
-func (c *ProductServiceClient) DecreaseStock(productId int64, orderId int64) (*pb.DecreaseStockResponse, error) {
+func (c *BookServiceClient) DecreaseStock(productId int64, orderId int64) (*pb.DecreaseStockResponse, error) {
 	req := &pb.DecreaseStockRequest{
 		Id:      productId,
 		OrderId: orderId,

@@ -6,7 +6,7 @@ option go_package = "./pkg/pb";
 
 // Create Order
 message CreateOrderRequest {
-  int64 productId = 1;
+  int64 bookId = 1;
   int64 quantity = 2;
   int64 userId = 3;
 }

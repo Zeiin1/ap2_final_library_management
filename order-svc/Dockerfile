@@ -1,11 +1,15 @@
-FROM golang
-
-COPY . /app
+FROM golang:latest
 
 WORKDIR /app
 
+COPY go.mod go.sum ./
+
 RUN go mod download
 
-ENTRYPOINT go run main.go
+COPY . .
+
+RUN go build -o main .
 
 EXPOSE 8081
+
+ENTRYPOINT ["./main"]

@@ -48,7 +48,7 @@ message DecreaseStockResponse {
 
 // Services
 service BookService {
-  rpc CreateProduct(CreateBookRequest) returns (CreateBookResponse) {};
+  rpc CreateBook(CreateBookRequest) returns (CreateBookResponse) {};
   rpc FindOne(FindOneRequest) returns (FindOneResponse) {};
   rpc DecreaseStock(DecreaseStockRequest) returns (DecreaseStockResponse) {};
 }

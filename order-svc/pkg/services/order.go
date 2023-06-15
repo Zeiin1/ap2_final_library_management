@@ -10,24 +10,24 @@ import (
 )
 
 type Server struct {
-	H          db.Handler
-	ProductSvc client.ProductServiceClient
+	H       db.Handler
+	BookSvc client.BookServiceClient
 }
 
 func (s *Server) CreateOrder(ctx context.Context, req *pb.CreateOrderRequest) (*pb.CreateOrderResponse, error) {
-	product, err := s.ProductSvc.FindOne(req.ProductId)
+	book, err := s.BookSvc.FindOne(req.BookId)
 
 	if err != nil {
 		return &pb.CreateOrderResponse{
 			Status: http.StatusBadRequest,
 			Error:  err.Error(),
 		}, nil
-	} else if product.Status >= http.StatusNotFound {
+	} else if book.Status >= http.StatusNotFound {
 		return &pb.CreateOrderResponse{
-			Status: product.Status,
-			Error:  product.Error,
+			Status: book.Status,
+			Error:  book.Error,
 		}, nil
-	} else if product.Data.Stock < req.Quantity {
+	} else if book.Data.Stock < req.Quantity {
 		return &pb.CreateOrderResponse{
 			Status: http.StatusConflict,
 			Error:  "Stock too less",
@@ -35,14 +35,14 @@ func (s *Server) CreateOrder(ctx context.Context, req *pb.CreateOrderRequest) (*
 	}
 
 	order := models.Order{
-		Price:     product.Data.Price,
-		ProductId: product.Data.Id,
-		UserId:    req.UserId,
+		Price:  book.Data.Price,
+		BookId: book.Data.Id,
+		UserId: req.UserId,
 	}
 
 	s.H.DB.Create(&order)
 
-	res, err := s.ProductSvc.DecreaseStock(req.ProductId, order.Id)
+	res, err := s.BookSvc.DecreaseStock(req.BookId, order.Id)
 	if err != nil {
 		return &pb.CreateOrderResponse{
 			Status: http.StatusBadRequest,

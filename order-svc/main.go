@@ -25,7 +25,7 @@ func main() {
 		log.Fatalln("Failed to listing:", err)
 	}
 
-	productSvc := client.InitProductServiceClient(c.ProductSvcUrl)
+	bookSvc := client.InitBookServiceClient(c.BookSvcUrl)
 
 	if err != nil {
 		log.Fatalln("Failed to listing:", err)
@@ -34,8 +34,8 @@ func main() {
 	fmt.Println("Order Svc on", c.Port)
 
 	s := service.Server{
-		H:          h,
-		ProductSvc: productSvc,
+		H:       h,
+		BookSvc: bookSvc,
 	}
 
 	grpcServer := grpc.NewServer()

@@ -7,6 +7,7 @@ import (
 	"github.com/sat0urn/go-grpc-auth-svc/pkg/pb"
 	"github.com/sat0urn/go-grpc-auth-svc/pkg/services"
 	"github.com/sat0urn/go-grpc-auth-svc/pkg/utils"
+
 	"google.golang.org/grpc"
 	"log"
 	"net"

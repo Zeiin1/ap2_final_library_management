@@ -1,9 +1,7 @@
 package auth
 
 import (
-	"context"
 	"github.com/gin-gonic/gin"
-	"github.com/sat0urn/go-grpc-api-gateway/pkg/auth/pb"
 	"net/http"
 	"strings"
 )
@@ -32,16 +30,6 @@ func (c *AuthMiddlewareConfig) AuthRequired(ctx *gin.Context) {
 		ctx.AbortWithStatus(http.StatusUnauthorized)
 		return
 	}
-
-	res, err := c.svc.Client.Validate(context.Background(), &pb.ValidateRequest{
-		Token: token[1],
-	})
-	if err != nil || res.Status != http.StatusOK {
-		ctx.AbortWithStatus(http.StatusUnauthorized)
-		return
-	}
-
-	ctx.Set("userId", res.UserId)
 
 	ctx.Next()
 }

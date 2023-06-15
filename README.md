@@ -59,7 +59,7 @@ and improve the user experience for library patrons.
 
 * **Zein** - [Zein](https://github.com/Zeiin1) - [@zeiin1](https://t.me/zeiin1)
 * **Aslan** - [Aslan](https://github.com/sat0urn) - [@aslansat](https://t.me/aslansat)
-* **Adil** - [s](https://github.com/s) - [@Lubazz](https://t.me/Lubazz)
+* **Adil** - [Adil](https://github.com/s) - [@Lubazz](https://t.me/Lubazz)
 
                                                 
                                                 

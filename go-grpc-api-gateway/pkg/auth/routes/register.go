@@ -2,11 +2,13 @@ package routes
 
 import (
 	"context"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/sat0urn/go-grpc-api-gateway/pkg/auth/pb"
-	"net/http"
 )
 
+// Register body
 type RegisterRequestBody struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`

@@ -1,4 +1,4 @@
-module github.com/sat0urn/go-grpc-product-svc
+module github.com/sat0urn/book-svc
 
 go 1.19
 

@@ -1,7 +1,7 @@
 package db
 
 import (
-	"github.com/sat0urn/go-grpc-product-svc/pkg/models"
+	"github.com/sat0urn/book-svc/pkg/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"log"

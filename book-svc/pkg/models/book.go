@@ -5,5 +5,5 @@ type Book struct {
 	Name             string           `json:"name"`
 	Stock            int64            `json:"stock"`
 	Price            int64            `json:"price"`
-	StockDecreaseLog StockDecreaseLog `gorm:"foreignKey:ProductRefer"`
+	StockDecreaseLog StockDecreaseLog `gorm:"foreignKey:BookRefer"`
 }

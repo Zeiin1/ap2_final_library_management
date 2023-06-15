@@ -2,9 +2,9 @@ package services
 
 import (
 	"context"
-	"github.com/sat0urn/go-grpc-product-svc/pkg/db"
-	"github.com/sat0urn/go-grpc-product-svc/pkg/models"
-	"github.com/sat0urn/go-grpc-product-svc/pkg/pb"
+	"github.com/sat0urn/book-svc/pkg/db"
+	"github.com/sat0urn/book-svc/pkg/models"
+	"github.com/sat0urn/book-svc/pkg/pb"
 	"net/http"
 )
 
@@ -12,30 +12,30 @@ type Server struct {
 	H db.Handler
 }
 
-func (s *Server) CreateProduct(ctx context.Context, req *pb.CreateProductRequest) (*pb.CreateProductResponse, error) {
-	var product models.Book
+func (s *Server) CreateBook(ctx context.Context, req *pb.CreateBookRequest) (*pb.CreateBookResponse, error) {
+	var book models.Book
 
-	product.Name = req.Name
-	product.Stock = req.Stock
-	product.Price = req.Price
+	book.Name = req.Name
+	book.Stock = req.Stock
+	book.Price = req.Price
 
-	if result := s.H.DB.Create(&product); result.Error != nil {
-		return &pb.CreateProductResponse{
+	if result := s.H.DB.Create(&book); result.Error != nil {
+		return &pb.CreateBookResponse{
 			Status: http.StatusConflict,
 			Error:  result.Error.Error(),
 		}, nil
 	}
 
-	return &pb.CreateProductResponse{
+	return &pb.CreateBookResponse{
 		Status: http.StatusCreated,
-		Id:     product.Id,
+		Id:     book.Id,
 	}, nil
 }
 
 func (s *Server) FindOne(ctx context.Context, req *pb.FindOneRequest) (*pb.FindOneResponse, error) {
-	var product models.Book
+	var book models.Book
 
-	if result := s.H.DB.First(&product, req.Id); result.Error != nil {
+	if result := s.H.DB.First(&book, req.Id); result.Error != nil {
 		return &pb.FindOneResponse{
 			Status: http.StatusNotFound,
 			Error:  result.Error.Error(),
@@ -43,10 +43,10 @@ func (s *Server) FindOne(ctx context.Context, req *pb.FindOneRequest) (*pb.FindO
 	}
 
 	data := &pb.FindOneData{
-		Id:    product.Id,
-		Name:  product.Name,
-		Stock: product.Stock,
-		Price: product.Stock,
+		Id:    book.Id,
+		Name:  book.Name,
+		Stock: book.Stock,
+		Price: book.Stock,
 	}
 
 	return &pb.FindOneResponse{
@@ -56,16 +56,16 @@ func (s *Server) FindOne(ctx context.Context, req *pb.FindOneRequest) (*pb.FindO
 }
 
 func (s *Server) DecreaseStock(ctx context.Context, req *pb.DecreaseStockRequest) (*pb.DecreaseStockResponse, error) {
-	var product models.Book
+	var book models.Book
 
-	if result := s.H.DB.First(&product, req.Id); result.Error != nil {
+	if result := s.H.DB.First(&book, req.Id); result.Error != nil {
 		return &pb.DecreaseStockResponse{
 			Status: http.StatusNotFound,
 			Error:  result.Error.Error(),
 		}, nil
 	}
 
-	if product.Stock <= 0 {
+	if book.Stock <= 0 {
 		return &pb.DecreaseStockResponse{
 			Status: http.StatusConflict,
 			Error:  "Stock too low",
@@ -81,12 +81,12 @@ func (s *Server) DecreaseStock(ctx context.Context, req *pb.DecreaseStockRequest
 		}, nil
 	}
 
-	product.Stock = product.Stock - 1
+	book.Stock = book.Stock - 1
 
-	s.H.DB.Save(&product)
+	s.H.DB.Save(&book)
 
 	log.OrderId = req.OrderId
-	log.ProductRefer = product.Id
+	log.BookRefer = book.Id
 
 	s.H.DB.Create(&log)
 

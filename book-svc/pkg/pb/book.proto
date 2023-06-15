@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package product;
+package book;
 
 option go_package = "./pkg/pb";
 
@@ -47,8 +47,8 @@ message DecreaseStockResponse {
 }
 
 // Services
-service ProductService {
-  rpc CreateProduct(CreateBookRequest) returns (CreateBookResponse) {};
+service BookService {
+  rpc CreateBook(CreateBookRequest) returns (CreateBookResponse) {};
   rpc FindOne(FindOneRequest) returns (FindOneResponse) {};
   rpc DecreaseStock(DecreaseStockRequest) returns (DecreaseStockResponse) {};
 }

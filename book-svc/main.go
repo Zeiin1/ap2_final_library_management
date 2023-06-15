@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/sat0urn/go-grpc-product-svc/pkg/config"
-	"github.com/sat0urn/go-grpc-product-svc/pkg/db"
-	"github.com/sat0urn/go-grpc-product-svc/pkg/pb"
-	"github.com/sat0urn/go-grpc-product-svc/pkg/services"
+	"github.com/sat0urn/book-svc/pkg/config"
+	"github.com/sat0urn/book-svc/pkg/db"
+	"github.com/sat0urn/book-svc/pkg/pb"
+	"github.com/sat0urn/book-svc/pkg/services"
 	"google.golang.org/grpc"
 	"log"
 	"net"
@@ -24,7 +24,7 @@ func main() {
 		log.Fatalln("Failed to listing:", err)
 	}
 
-	fmt.Println("Product Svc on", c.Port)
+	fmt.Println("Book Svc on", c.Port)
 
 	s := services.Server{
 		H: h,
@@ -32,7 +32,7 @@ func main() {
 
 	grpcServer := grpc.NewServer()
 
-	pb.RegisterProductServiceServer(grpcServer, &s)
+	pb.RegisterBookServiceServer(grpcServer, &s)
 
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalln("Failed to server:", err)

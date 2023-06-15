@@ -3,38 +3,39 @@ version: '3'
 services:
 
   api-gateway:
+    container_name: api-gateway
     build:
-      context: ./../go-grpc-api-gateway
-      dockerfile: ../go-grpc-api-gateway/Dockerfile
+      context: ./../api-gateway
+      dockerfile: ./../api-gateway/Dockerfile
     ports:
       - "3000:3000"
 
-  fullstack-postgres:
-    image: 'postgres:16beta1'
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 1234
-      POSTGRES_DB: services
-
   auth-svc:
+    container_name: auth-svc
     build:
-      context: ./../go-grpc-auth-svc
-      dockerfile: ../go-grpc-auth-svc/Dockerfile
+      context: ./../auth-svc
+      dockerfile: ./../auth-svc/Dockerfile
     ports:
       - "8080:8080"
+    depends_on:
+      - api-gateway
 
   order-svc:
+    container_name: order-svc
     build:
-      context: ./../go-grpc-order-svc
-      dockerfile: ../go-grpc-order-svc/Dockerfile
+      context: ./../order-svc
+      dockerfile: ./../order-svc/Dockerfile
     ports:
       - "8081:8081"
+    depends_on:
+      - auth-svc
 
-  product-svc:
+  book-svc:
+    container_name: book-svc
     build:
-      context: ./../go-grpc-product-svc
-      dockerfile: ./../go-grpc-product-svc/Dockerfile
+      context: ./../book-svc
+      dockerfile: ./../book-svc/Dockerfile
     ports:
       - "8082:8082"
+    depends_on:
+      - order-svc

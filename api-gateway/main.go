@@ -11,7 +11,7 @@ import (
 
 func main() {
 	c, err := config.LoadConfig()
-	log.Println(c)
+
 	if err != nil {
 		log.Fatalln("Failed at config: ", err)
 	}

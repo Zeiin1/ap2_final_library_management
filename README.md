@@ -5,7 +5,8 @@
 4. `auth-service`                    -> microservice for authentication
 5. `book-service`                    -> microservice for book manage
 6. `order-service`                   -> microservice for book ordering manage
-7. `parent-microservice_development` -> consists from trials to implement front-end side to microservices-based backend(only auth was implemented)
+7. `parent_microservice_development` -> consists from trials to implement front-end side to microservices-based backend(only auth was implemented) - docker not working
+8. `parent-microservice_development_2` -> just a backend microservices without a frond side - docker is working
 
 *Microservices/Docker-components* -> 3, 4, 5, 6
 

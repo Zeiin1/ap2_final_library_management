@@ -61,13 +61,6 @@ and improve the user experience for library patrons.
 * **Aslan** - [Aslan](https://github.com/sat0urn) - [@aslansat](https://t.me/aslansat)
 * **Adil** - [s](https://github.com/s) - [@Lubazz](https://t.me/Lubazz)
 
-```
- _______ _______ _______ _____  _______ _______ 
-|    |  |       |_     _|     \|    ___|   _   |
-|       |   -   |_|   |_|  --  |    ___|       |
-|__|____|_______|_______|_____/|_______|___|___|
-```
-
                                                 
                                                 
                                                 

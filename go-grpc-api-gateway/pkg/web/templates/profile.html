@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>OTYRAR</title>
+    <meta name="keywords" lang="ru" content="">
+    <meta name="description" content="">
+    <meta name="author" lang="ru" >
+    <meta name="robots" content="all">
+    <link rel="icon" type="image/png" href="/img/Icons/icon.png">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500,700,800,900&display=swap&subset=cyrillic-ext"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/app.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/profile.css">
+    <link rel="stylesheet"  href="/static/src/with.js">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.1/css/bootstrap.min.css"
+        integrity="sha512-T584yQ/tdRR5QwOpfvDfVQUidzfgc2339Lc8uBDtcp/wYu80d7jwBgAxbyMh0a9YM9F8N3tdErpFI8iaGx6x5g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <script src="https://kit.fontawesome.com/c98d165499.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <a href="">
+                    <img class="logo__img" src="/static/img/logo.png" alt="" width="196" height="47.6">
+                </a>
+            </div>
+
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-link"><a href="">Profile</a></li>
+                    <li class="nav-link"><a href="#aboutus">Mail</a></li>
+                    <li class="nav-link"><a href="#aboutus">Dept</a></li>
+                    <a text="{{.Name}}" style="color: black" href="/user_info/{{.ID}}" >{{.Name}}</a>
+
+                    <div class="icons">
+                        <a href="/user_info/{{.ID}}">
+                            <svg id="first" width="25" height="25" viewBox="0 0 898 898" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M898 448.551C898 200.927 696.848 0 449 0C201.152 0 0 200.927 0 448.551C0 584.935 61.962 707.848 158.946 790.352C159.844 791.25 160.742 791.25 160.742 792.148C168.824 798.434 176.906 804.72 185.886 811.006C190.376 813.7 193.968 817.236 198.458 820.828C272.659 871.137 360.25 898.02 449.898 898C539.546 898.02 627.137 871.137 701.338 820.828C705.828 818.134 709.42 814.598 713.91 811.848C721.992 805.618 730.972 799.332 739.054 793.046C739.952 792.148 740.85 792.148 740.85 791.25C836.038 707.792 898 584.935 898 448.551V448.551ZM449 841.482C364.588 841.482 287.36 814.542 223.602 769.698C224.5 762.514 226.296 755.386 228.092 748.202C233.443 728.733 241.291 710.038 251.44 692.583C261.318 675.521 272.992 660.255 287.36 646.785C300.83 633.315 316.994 620.799 333.158 610.921C350.22 601.043 368.18 593.859 387.936 588.471C407.846 583.104 428.38 580.405 449 580.445C510.213 580.011 569.176 603.492 613.334 645.887C633.988 666.541 650.152 690.787 661.826 718.568C668.112 734.732 672.602 751.794 675.296 769.698C609.022 816.291 530.013 841.354 449 841.482ZM311.606 426.157C303.694 408.041 299.715 388.452 299.932 368.685C299.932 348.985 303.524 329.229 311.606 311.269C319.688 293.309 330.464 277.201 343.934 263.731C357.404 250.261 373.568 239.542 391.528 231.46C409.488 223.378 429.244 219.785 449 219.785C469.654 219.785 488.512 223.378 506.472 231.46C524.432 239.542 540.596 250.317 554.066 263.731C567.536 277.201 578.312 293.365 586.394 311.269C594.476 329.229 598.068 348.985 598.068 368.685C598.068 389.339 594.476 408.197 586.394 426.101C578.594 443.795 567.64 459.923 554.066 473.695C540.289 487.249 524.162 498.184 506.472 505.967C469.364 521.217 427.738 521.217 390.63 505.967C372.94 498.184 356.813 487.249 343.036 473.695C329.443 460.123 318.75 443.931 311.606 426.101V426.157ZM728.278 723.956C728.278 722.16 727.38 721.262 727.38 719.466C718.548 691.371 705.53 664.768 688.766 640.555C671.986 616.162 651.364 594.649 627.702 576.853C609.631 563.258 590.043 551.807 569.332 542.729C578.754 536.513 587.485 529.306 595.374 521.233C608.762 508.016 620.52 493.243 630.396 477.231C650.284 444.555 660.555 406.934 660.03 368.685C660.308 340.371 654.808 312.298 643.866 286.181C633.063 261.017 617.514 238.17 598.068 218.888C578.651 199.807 555.799 184.572 530.718 173.987C504.558 163.065 476.449 157.585 448.102 157.88C419.752 157.602 391.642 163.102 365.486 174.044C340.188 184.606 317.281 200.163 298.136 219.785C279.056 239.182 263.821 262.015 253.236 287.079C242.294 313.196 236.794 341.269 237.072 369.583C237.072 389.339 239.766 408.197 245.154 426.101C250.542 444.959 257.726 462.021 267.604 478.129C276.584 494.293 289.156 508.661 302.626 522.131C310.708 530.213 319.688 537.341 329.566 543.627C308.79 552.947 289.196 564.703 271.196 578.649C247.848 596.609 227.194 618.105 210.132 641.453C193.197 665.566 180.166 692.196 171.518 720.364C170.62 722.16 170.62 723.956 170.62 724.854C99.678 653.07 55.676 556.199 55.676 448.551C55.676 232.358 232.582 55.6199 449 55.6199C665.418 55.6199 842.324 232.358 842.324 448.551C842.206 551.819 801.202 650.838 728.278 723.956V723.956Z"
+                                    fill="white" />
+                            </svg>
+                        </a>
+                        <a href="/">
+                            <svg width="25" height="25" viewBox="0 0 48 46" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M3.3 3.28571H29.7V19.3857H33V3.28571C33 2.41429 32.6523 1.57855 32.0335 0.962363C31.4146 0.346172 30.5752 0 29.7 0H3.3C2.42479 0 1.58542 0.346172 0.966547 0.962363C0.347677 1.57855 0 2.41429 0 3.28571V42.7143C0 43.5857 0.347677 44.4214 0.966547 45.0376C1.58542 45.6538 2.42479 46 3.3 46H29.7C30.5752 46 31.4146 45.6538 32.0335 45.0376C32.6523 44.4214 33 43.5857 33 42.7143H3.3V3.28571Z"
+                                    fill="white" />
+                                <path
+                                    d="M38.3521 22.3948C38.0361 22.1258 37.6295 21.9853 37.2137 22.0012C36.798 22.0172 36.4036 22.1885 36.1093 22.4809C35.8151 22.7734 35.6428 23.1654 35.6267 23.5787C35.6106 23.9919 35.7521 24.396 36.0227 24.7101L41.6066 30.1452H17.652C17.2139 30.1452 16.7937 30.3182 16.4839 30.6262C16.1741 30.9341 16 31.3518 16 31.7873C16 32.2228 16.1741 32.6404 16.4839 32.9484C16.7937 33.2563 17.2139 33.4293 17.652 33.4293H41.6066L36.0227 39.1108C35.8498 39.258 35.7093 39.4391 35.6102 39.6428C35.511 39.8466 35.4553 40.0684 35.4465 40.2946C35.4377 40.5207 35.476 40.7462 35.5591 40.9569C35.6421 41.1677 35.7681 41.359 35.9291 41.5191C36.0901 41.6791 36.2827 41.8043 36.4947 41.8869C36.7067 41.9694 36.9335 42.0075 37.1611 41.9988C37.3886 41.99 37.6118 41.9347 37.8168 41.8361C38.0217 41.7375 38.204 41.5979 38.3521 41.426L48 31.9022L38.3521 22.3948Z"
+                                    fill="white" />
+                            </svg>
+                        </a>
+                    </div>
+
+                </ul>
+
+
+                <div class="container container-menu">
+                    <nav class="navbar navbar-expand-lg ftco_navbar ftco-navbar-light" id="ftco-navbar">
+                        <div class="container container-menu">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="fa fa-bars menuo"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="ftco-nav">
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                                    <li class="nav-item"><a href="#aboutus" class="nav-link">About us</a></li>
+                                    <li class="nav-item"><a href="#work" class="nav-link">How it works?</a></li>
+                                    <button type="button" class="btn btn-warning">Sign up</button>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+
+            </nav>
+
+        </div>
+
+
+    </header>
+
+
+
+    <section class="percentage">
+        <div class="title">
+            <h1 class="prof">Profile:</h1>
+        </div>
+
+        <div class="row">
+
+            <div class="left">
+                <div class="box1">
+                    <div class="general">
+                        <h1 class="date">04.04.2022</h1>
+                        <h1 class="book_name">Hawking S.:
+                            The Theory of Everything</h1>
+                        <h1 class="book_id">Book id: #1004281</h1>
+                        <h1 class="library">AITU scientific library</h1>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="inner">
+                <div class="box">
+                    <div class="percent">
+                        <svg>
+                            <circle cx="70" cy="70" r="70" id="circle"></circle>
+                            <circle cx="70" cy="70" r="70"></circle>
+                        </svg>
+                        <div class="number">
+                            <h2 id="num">5<span></span></h2>
+                        </div>
+                    </div>
+                    <h2 class="text" id="days">Days Left</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="cards">
+        <div class="container py-5">
+
+
+
+            <div class="row text-center align-items-end">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="bg-white p-5 rounded-lg shadow">
+                        <h2 class="h1 font-weight-bold" id="rent">All books<span
+                                class="text-small font-weight-normal ml-2"></span></h2>
+
+                        <div class="custom-separator my-4 mx-auto bg-primary"></div>
+
+                        <ul class="list-unstyled my-5 text-small text-left">
+                            <li class="mb-3">
+                                <i class="fa fa-check mr-2 text-primary"></i> The Theory of Everything
+                            </li>
+                            <li class="mb-3">
+                                <i class="fa fa-check mr-2 text-primary"></i> Gentleman-cambrioleur
+                            </li>
+                            <li class="mb-3">
+                                <i class="fa fa-check mr-2 text-primary"></i> Sherlock Holmes
+                            </li>
+                            <li class="mb-3">
+                                <i class="fa fa-check mr-2 text-primary"></i> Koshpendiler
+                            </li>
+                            <li class="mb-3">
+                                <i class="fa fa-check mr-2 text-primary"></i> The Mysterious Affair
+                            </li>
+                            <li class="mb-3">
+                                <i class="fa fa-check mr-2 text-primary"></i> Harry Potter
+                            </li>
+                        </ul>
+                        <a href="/library/books" class="btn btn-primary btn-block p-2 shadow rounded-pill">More</a>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="bg-white p-5 rounded-lg shadow">
+                        <h2 class="h1 font-weight-bold">History<span class="text-small font-weight-normal ml-2"></span>
+                        </h2>
+
+                        <div class="custom-separator my-4 mx-auto bg-primary"></div>
+
+                        <ul class="list-unstyled my-5 text-small text-left font-weight-normal">
+                            <li class="mb-3">
+                                <i class="fa fa-check mr-2 text-primary"></i> Poirot Investigates
+                            </li>
+                            <li class="mb-3">
+                                <i class="fa fa-check mr-2 text-primary"></i> Cards on the Table
+                            </li>
+                            <li class="mb-3">
+                                <i class="fa fa-check mr-2 text-primary"></i> Hawking A.: Kingdom
+                            </li>
+                            <li class="mb-3">
+                                <i class="fa fa-check mr-2 text-primary"></i> Hawking A.: Torn
+                            </li>
+                            <li class="mb-3">
+                                <i class="fa fa-check mr-2 text-primary"></i> Tar zhol, taigak kesh
+                            </li>
+                            <li class="mb-3">
+                                <i class="fa fa-check mr-2 text-primary"></i> Hercule Poirot
+                            </li>
+                        </ul>
+                        <a href="/library/history" class="btn btn-primary btn-block p-2 shadow rounded-pill">More</a>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-4">
+                    <div class="bg-white p-5 rounded-lg shadow">
+                        <h2 class="h1 font-weight-bold">Fines<span class="text-small font-weight-normal ml-2"> </span>
+                        </h2>
+
+                        <div class="custom-separator my-4 mx-auto bg-primary"></div>
+
+                        <ul class="list-unstyled my-5 text-small text-left font-weight-normal">
+                            <li class="mb-3">
+                                <i class="fa mr-2 text-primary"></i>
+                            </li>
+                            <li class="mb-3">
+                                <i class="fa  mr-2 text-primary"></i>
+                            </li>
+                            <li class="mb-3">
+                                <i class="fa  mr-2 text-primary"></i>
+                            </li>
+
+                            <li class="mb-3">
+                                <i class="fa  mr-2 text-primary" id="fine"></i> You don't have any fines yet
+                            </li>
+                            <li class="mb-3">
+                                <i class="fa mr-2 text-primary"></i>
+                            </li>
+                            <li class="mb-3">
+                                <i class="fa  mr-2 text-primary"></i>
+                            </li>
+                            <li class="mb-3">
+                                <i class="fa  mr-2 text-primary"></i>
+                            </li>
+                        </ul>
+                        <a href="#" class="btn btn-primary btn-block p-2 shadow rounded-pill">Pay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="blur">
+        <h2 class="text-center">Some Information about books</h2>
+
+        <div class="pricing">
+            <div class="container">
+                <div class="pricing-table table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th>
+                                    TAKED before
+                                </th>
+                                <th class="highlight">
+                                    popularity
+                                </th>
+                                <th>
+                                    Language
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="ptable-title">Torn</span></td>
+                                <td>
+                                    <!-- Icon -->
+                                    <i class="fa fa-hdd-o red"></i>
+                                    5
+                                </td>
+                                <td>
+                                    <!-- Icon -->
+                                    <i class="fa fa-hdd-o green"></i>
+                                    6
+                                </td>
+                                <td>
+                                    <!-- Icon -->
+                                    <i class="fa fa-hdd-o lblue"></i>
+                                    Englich
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="ptable-title"> Hercule Poirot</span></td>
+                                <td>
+                                    <!-- Icon -->
+                                    <i class="fa fa-hdd-o red"></i>
+                                    5
+                                </td>
+                                <td>
+                                    <!-- Icon -->
+                                    <i class="fa fa-hdd-o green"></i>
+                                    6
+                                </td>
+                                <td>
+                                    <!-- Icon -->
+                                    <i class="fa fa-hdd-o lblue"></i>
+                                    Englich
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="ptable-title"> Koshpendiler</span></td>
+                                <td>
+                                    <!-- Icon -->
+                                    <i class="fa fa-hdd-o red"></i>
+                                    5
+                                </td>
+                                <td>
+                                    <!-- Icon -->
+                                    <i class="fa fa-hdd-o green"></i>
+                                    6
+                                </td>
+                                <td>
+                                    <!-- Icon -->
+                                    <i class="fa fa-hdd-o lblue"></i>
+                                    Englich
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="ptable-title">Sherlock Holmes</span></td>
+                                <td>
+                                    <!-- Icon -->
+                                    <i class="fa fa-hdd-o red"></i>
+                                    5
+                                </td>
+                                <td>
+                                    <!-- Icon -->
+                                    <i class="fa fa-hdd-o green"></i>
+                                    6
+                                </td>
+                                <td>
+                                    <!-- Icon -->
+                                    <i class="fa fa-hdd-o lblue"></i>
+                                    Englich
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+    <footer class=" text-white text-center text-lg-start" style="background-color: #4843ff;">
+        <div class="container p-4" style="background-color: #4843ff;">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+
+                    <img class="logo_img" src="/static/img/logo.png" alt="" width="120" height="29">
+
+                    <p>
+                        if you have any questions or suggestions, you can contact us via messengers or by writing to us
+                        by mail
+                    </p>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase footertext">Links</h5>
+
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="universities.html" class="text-white">Home</a>
+                        </li>
+                        <li>
+                            <a href="about/about.html" class="text-white">About us</a>
+                        </li>
+                        <li>
+                            <a href="news.html" class="text-white">How it work?</a>
+                        </li>
+                        <li>
+                            <a href="info.html" class="text-white">Sign up</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase mb-0 footertext">Contact</h5>
+                    <p>
+                        <i class="city"><i class="fas fa-home"></i></i> Nur-Sultan (Astana)
+                    </p>
+                    <p>
+                        <i class="email"><i class="fas fa-envelope-open-text"></i></i> otyrar@gmail.com
+                    </p>
+                    <p>
+                        <a class="phone" href="tel:+77085176491"><i class="fas fa-phone"></i> +7 (708)517-64-91</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">© 2022 : Grizzly</div>
+
+    </footer>
+</body>
+
+</html>

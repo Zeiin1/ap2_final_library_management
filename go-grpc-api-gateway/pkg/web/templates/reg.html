@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration form</title>
+    <link rel="stylesheet" type="text/css" href="/static/src/reg.css">
+</head>
+<body>
+
+
+
+<div class="signupFrm">
+    <div class="wrapper">
+        <form method="POST" action="/registration"  class="form">
+            <h1 class="title">Sign up</h1>
+
+            <div class="inputContainer">
+                <label for="name" class="label">Name</label>
+                <input type="text" name="name"    id="name" class="input" placeholder=""/>
+
+            </div>
+
+            <div class="inputContainer">
+                <label for="Surname" class="label">Surname</label>
+                <input type="text" name="surname"   id="surname" class="input" placeholder="a"/>
+
+            </div>
+
+            <div class="inputContainer">
+                <label for="email" class="label">Email</label>
+                <input type="email" name="email"  id="email" class="input" placeholder="" >
+
+            </div>
+
+            <div class="inputContainer">
+                <label for="password" class="label">Password</label>
+                <input type="password" name="password" id="password" class="input" placeholder="">
+
+            </div>
+
+
+
+            <input type="submit" class="submitBtn" value="Sign up">
+            <a href="/loginPage">Already have account? Sign in</a>
+        </form>
+    </div>
+</div>
+
+
+
+</body>
+</html>

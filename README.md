@@ -8,7 +8,7 @@ BOOK_SVC_URL={svc_host}:8082
 // svc_host = localhost -> on local machine (pc)
 // svc_host = book-svc -> on Docker
 // db_host = localhost -> on local machine (pc)
-// db_host = postgresql -> on Docker
+// db_host = {docker_db_container_name} -> on Docker
 ```
 
 Exchange the values in _{} brackets_ with needed.

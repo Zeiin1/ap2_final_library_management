@@ -4,6 +4,8 @@ Create `dev.env` file in `pkg/config/envs` __(create directory envs)__, then pas
 ```env
 PORT=:8082
 DB_URL=postgres://{username}:{password}@{host}:5432/services
+// host = localhost -> in local machine (pc)
+// host = postgresql -> in Docker
 ```
 
 Exchange the values in _{} brackets_ with needed.
